@@ -86,14 +86,20 @@ public class JdbcMemberRepository implements MemberRepository{
 
             if(rs.next()) {
                 Member member = new Member();
-                
+                member.setId(rs.getLong("id"));
+                member.setName(rs.getString("name"));
+                return Optional.of(member);
+            } else {
+                return Optional.empty();
             }
-
-        } catch() {
-
+        } catch(Exception e) {
+            throw new IllegalStateException(e);
+        } finally {
+            close(conn, pstmt, rs);
         }
+    }
 
-        return Optional.empty();
+    private Connection getConnection() {
     }
 
     @Override
