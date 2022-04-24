@@ -4,6 +4,7 @@ import hello.hellospring.domain.Member;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -109,6 +110,26 @@ public class JdbcMemberRepository implements MemberRepository{
 
     @Override
     public List<Member> findAll() {
+        String sql = "select * from member";
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = getConnection();
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+
+            List<Member> members = new ArrayList<>();
+            while(rs.next()){
+                
+            }
+
+        } catch (Exception e) {
+
+        }
+
         return null;
     }
 }
