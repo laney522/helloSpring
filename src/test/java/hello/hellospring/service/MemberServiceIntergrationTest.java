@@ -14,23 +14,19 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
-@Transactional
+//@Transactional
 class MemberServiceIntergrationTest {
 
     @Autowired MemberService memberService;
     @Autowired MemoryMemberRepository memberRepository;
 
-    @AfterEach
-    public void afterEach() {
-        memberRepository.clearStore();
-    }
+
 
     @Test
-    void join() {
+    void 회원가입() {
         //given
         Member member = new Member();
         member.setName("spring");
-
 
         //when
         Long saveId = memberService.join(member);
@@ -56,22 +52,4 @@ class MemberServiceIntergrationTest {
 
         assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
 
-//        try {
-//            memberService.join(member2);
-//            fail();
-//        } catch(IllegalStateException e) {
-//            assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
-//        }
-
-
-        //then
-    }
-
-    @Test
-    void findMember() {
-    }
-
-    @Test
-    void findOne() {
-    }
 }
